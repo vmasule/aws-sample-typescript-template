@@ -1,0 +1,22 @@
+service:
+  name: sample-aws-lambda
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-webpack
+custom:
+  webpack:
+    # webpackConfig: ./webpack.config.serverless.js
+    webpackConfig: serverless/webpack.config.js
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: eu-west-1
+
+functions:
+  search:
+    name: sample-typescript-lambda
+    handler: src/handler.index
+    memorySize: 512
+    environment: ${file(env.yml):default}
